@@ -3,6 +3,7 @@ package spartans;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.http.Method;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.*;
 
 import java.util.HashMap;
@@ -63,6 +64,35 @@ public class SpartanTest {
                 .contentType(ContentType.XML)
         ;
     }
+
+    @DisplayName("Testing GET /api/spartans/search Endpoint")
+    @Test
+    public void testSearch(){
+
+        given()
+                .log().all()
+                .queryParam("nameContain","re")
+                .queryParam("gender","Male").
+        when()
+                .get("/spartans/search").
+        then()
+                .log().all()
+                .statusCode(200)
+                .contentType(ContentType.JSON)
+//                .body("content.name" , everyItem(containsString("re")) )
+                .body("content.gender" , everyItem(is("Male")))
+
+        ;
+
+
+
+    }
+
+
+
+
+
+
 
     @DisplayName("Testing POST /api/spartans Endpoint")
     @Test
