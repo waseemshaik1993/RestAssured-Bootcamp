@@ -110,8 +110,12 @@ public class SpartanTest {
                 .statusCode(200)
                 .contentType(ContentType.JSON)
                 .body("id", is(idFromPostTest) )
+                .body("name", is("RE-BOOTCAMP") )
+                .body("gender", is("Male") )
+                .body("phone", is(1234567890) )
 
-                ;
+
+        ;
 
     }
 
