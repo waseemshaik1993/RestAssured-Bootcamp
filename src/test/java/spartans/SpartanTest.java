@@ -1,7 +1,12 @@
 package spartans;
 
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import org.junit.jupiter.api.*;
+
+import static io.restassured.RestAssured.* ;
+import static io.restassured.matcher.RestAssuredMatchers.* ;
+import static org.hamcrest.Matchers.* ;
 
 public class SpartanTest {
 
@@ -11,10 +16,18 @@ public class SpartanTest {
         RestAssured.basePath = "/api" ;
     }
 
-
+    @DisplayName("Testing /api/hello endpoint")
     @Test
     public void test1(){
-        Assertions.assertEquals(7, 4+3);
+        //Assertions.assertEquals(7, 4+3);
+        given()
+                .accept(ContentType.TEXT).
+        when()
+                .get("/hello").
+        then()
+                .statusCode(200) ;
+
+
     }
 
 
