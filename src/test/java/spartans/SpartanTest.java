@@ -28,6 +28,21 @@ public class SpartanTest {
                 .body( is("Hello from Sparta") )
                 .header("content-type" , "text/plain;charset=UTF-8") ;
     }
+
+    @DisplayName("Testing /api/spartans Endpoint return json result")
+    @Test
+    public void testAllSpartans(){
+
+        given()
+                .accept(ContentType.JSON).
+        when()
+                .get("/spartans").
+        then()
+                .statusCode(200)
+                .contentType(ContentType.JSON)
+                ;
+    }
+
     @AfterAll
     public static void tearDown(){
         RestAssured.reset();
