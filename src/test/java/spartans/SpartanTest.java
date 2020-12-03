@@ -119,6 +119,42 @@ public class SpartanTest {
 
     }
 
+    @Order(3)
+    @DisplayName("Testing PUT /api/spartans/{id} Endpoint")
+    @Test
+    public void testUpdate1Data(){
+
+        Map<String,Object> spartanMap = new HashMap<>();
+        spartanMap.put("name" , "Yucel");
+        spartanMap.put("gender" , "Male");
+        spartanMap.put("phone" , 1236549870);
+
+        given()
+                .log().all()
+                .contentType(ContentType.JSON)
+                .body(spartanMap).
+        when()
+                .put("/spartans/{id}", idFromPostTest).
+        then()
+                .statusCode(204) ;
+        // now lets send another get request to make sure it actually updated
+
+        when()
+                .get("/spartans/{id}",idFromPostTest).
+        then()
+                .log().all()
+                .statusCode(200)
+                .body("id" , is( idFromPostTest) )
+                .body("name" ,is ( spartanMap.get("name")  ) )
+                .body("gender" ,is ( spartanMap.get("gender")  ) )
+                .body("phone" ,is ( spartanMap.get("phone")  ) )
+        ;
+
+
+    }
+
+
+
 
 
     @AfterAll
