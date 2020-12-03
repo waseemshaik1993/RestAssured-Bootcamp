@@ -15,7 +15,6 @@ public class SpartanTest {
         RestAssured.baseURI = "http://100.26.130.128:8000" ;
         RestAssured.basePath = "/api" ;
     }
-
     @DisplayName("Testing /api/hello endpoint")
     @Test
     public void test1(){
@@ -28,12 +27,7 @@ public class SpartanTest {
                 .statusCode(200)
                 .body( is("Hello from Sparta") )
                 .header("content-type" , "text/plain;charset=UTF-8") ;
-
-
-
     }
-
-
     @AfterAll
     public static void tearDown(){
         RestAssured.reset();
