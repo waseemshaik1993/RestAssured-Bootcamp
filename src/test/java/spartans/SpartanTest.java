@@ -15,7 +15,7 @@ import static org.hamcrest.Matchers.* ;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SpartanTest {
 
-    private static int idFromPostTest ;
+    private static int idFromPostTest;
 
     @BeforeAll
     public static void init(){
@@ -153,7 +153,32 @@ public class SpartanTest {
 
     }
 
+    @Order(4)
+    @DisplayName("Testing PATCH /api/spartans/{id} Endpoint")
+    @Test
+    public void testPartialUpdate1Data(){
 
+        // just updating phone number to 2123435678
+        String patchBody = "{ \"phone\": 2123435678 }";
+        given()
+                .log().all()
+                .contentType(ContentType.JSON)
+                .body(patchBody).
+        when()
+                .patch("/spartans/{id}", idFromPostTest).
+        then()
+                .statusCode(204) ;
+
+        // now make sure it actually worked
+        when()
+                .get("/spartans/{id}",idFromPostTest).
+        then()
+                .log().all()
+                .statusCode(200)
+                .body("phone" ,is(2123435678 ) )
+                ;
+
+    }
 
 
 
