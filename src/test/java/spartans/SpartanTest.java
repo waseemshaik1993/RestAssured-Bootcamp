@@ -31,7 +31,7 @@ public class SpartanTest {
 
     @DisplayName("Testing /api/spartans Endpoint return json result")
     @Test
-    public void testAllSpartans(){
+    public void testAllSpartansGetJsonResult(){
 
         given()
                 .accept(ContentType.JSON).
@@ -41,6 +41,20 @@ public class SpartanTest {
                 .statusCode(200)
                 .contentType(ContentType.JSON)
                 ;
+    }
+
+    @DisplayName("Testing /api/spartans Endpoint return xml result")
+    @Test
+    public void testAllSpartansGetXMLResult(){
+
+        given()
+                .accept(ContentType.XML).
+        when()
+                .get("/spartans").
+        then()
+                .statusCode(200)
+                .contentType(ContentType.XML)
+        ;
     }
 
     @AfterAll
