@@ -25,7 +25,10 @@ public class SpartanTest {
         when()
                 .get("/hello").
         then()
-                .statusCode(200) ;
+                .statusCode(200)
+                .body( is("Hello from Sparta") )
+                .header("content-type" , "text/plain;charset=UTF-8") ;
+
 
 
     }
