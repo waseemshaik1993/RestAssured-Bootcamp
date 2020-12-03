@@ -180,7 +180,21 @@ public class SpartanTest {
 
     }
 
+    @Order(5)
+    @DisplayName("Testing DELETE /api/spartans/{id} Endpoint")
+    @Test
+    public void testDelete1Data(){
 
+        when()
+                .delete("/spartans/{id}" , idFromPostTest).
+        then()
+                .statusCode(204);
+        // now send another get request to make sure you get 404
+        when()
+                .get("/spartans/{id}",idFromPostTest).
+        then()
+                .statusCode(404);
+    }
 
     @AfterAll
     public static void tearDown(){
